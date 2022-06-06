@@ -9,15 +9,25 @@
       <logicalFolder name="f2" displayName="Common" projectFiles="true">
         <itemPath>lib/Common/Types.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f5" displayName="Devices" projectFiles="true">
+        <itemPath>lib/Devices/Devices.h</itemPath>
+        <itemPath>lib/Devices/p32mx2xxfxxxb.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f3" displayName="Exceptions" projectFiles="true">
         <itemPath>lib/Exceptions/AntipodeException.cpp</itemPath>
         <itemPath>lib/Exceptions/AntipodeException.h</itemPath>
         <itemPath>lib/Exceptions/MemoryManagerException.h</itemPath>
         <itemPath>lib/Exceptions/MemoryManagerException.cpp</itemPath>
+        <itemPath>lib/Exceptions/IOException.h</itemPath>
+        <itemPath>lib/Exceptions/IOException.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="MemoryManager" projectFiles="true">
         <itemPath>lib/MemoryManager/MemoryManager.cpp</itemPath>
         <itemPath>lib/MemoryManager/MemoryManager.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f6" displayName="Ports" projectFiles="true">
+        <itemPath>lib/Ports/PhysicalPort.h</itemPath>
+        <itemPath>lib/Ports/PhysicalPort.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Registers" projectFiles="true">
         <itemPath>lib/Registers/Registers.h</itemPath>
@@ -191,7 +201,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers"/>
+                  value="lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>

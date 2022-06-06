@@ -7,7 +7,6 @@
  */
 
 #include "MemoryManagerException.h"
-#include "AntipodeException.h"
 
 Antipode::MemoryManagerException::MemoryManagerException(int code, char* message) : Antipode::AntipodeException(code, message) {
 

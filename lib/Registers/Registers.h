@@ -15,6 +15,43 @@ namespace Antipode {
 
     /**
      * 
+     * Register utilities
+     */
+    class RegisterUtils {
+    public:
+
+        /**
+         * Checks if all 'bits' are Hi in 'reg' value
+         * @param reg the value
+         * @param bits the bits
+         * @return true if all bits are Hi otherwise false
+         */
+        static bool areHi(volatile uint32 reg, uint32 bits) {
+            return (reg & bits) == bits;
+        }
+
+        /**
+         * Checks if all 'bits' are Lo in 'reg' value
+         * @param reg the value
+         * @param bits the bits
+         * @return true if all bits are Lo otherwise false
+         */
+        static bool areLo(volatile uint32 reg, uint32 bits) {
+            return (~reg & bits) == bits;
+        }
+
+        /**
+         * Checks if 'value' represent a valid bit (must be a power of 2)
+         * @param value the value
+         * @return true if value is valid otherwise false
+         */
+        static bool isBitValid(uint32 value) {
+            return (value != 0) && ((value & (value - 1)) == 0);
+        }
+    };
+
+    /**
+     * 
      * Represents a 4x32 bits register that has clr, set & inv sub-registers 
      * associated.
      */
@@ -71,6 +108,24 @@ namespace Antipode {
     class StandardRegister {
     public:
         volatile uint32 base;
+    };
+
+    /**
+     * 
+     * Represents a port register set.
+     */
+    class PortRegister {
+    public:
+        volatile ClrSetInvRegister ansel;
+        volatile ClrSetInvRegister tris;
+        volatile ClrSetInvRegister port;
+        volatile ClrSetInvRegister lat;
+        volatile ClrSetInvRegister odc;
+        volatile ClrSetInvRegister cnpu;
+        volatile ClrSetInvRegister cnpd;
+        volatile ClrSetInvRegister cncon;
+        volatile ClrSetInvRegister cnen;
+        volatile ClrSetInvRegister cnstat;
     };
 }
 
