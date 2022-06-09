@@ -55,6 +55,29 @@ namespace Antipode {
         Lo,
         Hi
     };
+
+    /**
+     * Convenience enum for interrupt priority
+     */
+    enum InterruptPriority {
+        Ip1 = 1,
+        Ip2,
+        Ip3,
+        Ip4,
+        Ip5,
+        Ip6,
+        Ip7
+    };
+
+    /**
+     * Convenience enum for interrupt sub-priority
+     */
+    enum InterruptSubPriority {
+        Isp0,
+        Isp1,
+        Isp2,
+        Isp3,
+    };
 }
 
 #endif	/* TYPES_H */
