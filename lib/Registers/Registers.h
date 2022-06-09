@@ -127,6 +127,16 @@ namespace Antipode {
         volatile ClrSetInvRegister cnen;
         volatile ClrSetInvRegister cnstat;
     };
+
+    template <uint32 IFSVEC_MAX, uint32 IECVEC_MAX, uint32 IPCVEC_MAX> class InterruptRegister {
+    public:
+        volatile ClrSetInvRegister intcon;
+        volatile BaseOnlyRegister intstat;
+        volatile ClrSetInvRegister iptmr;
+        volatile ClrSetInvRegister ifs[IFSVEC_MAX];
+        volatile ClrSetInvRegister iec[IECVEC_MAX];
+        volatile ClrSetInvRegister ipc[IPCVEC_MAX];
+    };
 }
 
 #endif	/* REGISTERS_H */
