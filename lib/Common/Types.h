@@ -30,10 +30,11 @@
 #define ALL 0xFFFFFFFF
 #define NONE 0x00000000
 
+#define FREQ_40_MHZ 0x02625A00 // 40E+6 Hz
+
 namespace Antipode {
 
     /**
-     * 
      * Custom framework types
      */
     typedef unsigned char uchar;
@@ -48,7 +49,6 @@ namespace Antipode {
     typedef signed long long sint64;
 
     /**
-     * 
      * Logic level values
      */
     enum LogicLevel {
@@ -77,6 +77,15 @@ namespace Antipode {
         Isp1,
         Isp2,
         Isp3,
+    };
+
+    /**
+     * Time unit enum for delays
+     */
+    enum TimeUnit {
+        MICROSECONDS,
+        MILLISECONDS,
+        SECONDS
     };
 }
 

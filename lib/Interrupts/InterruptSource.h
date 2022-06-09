@@ -16,7 +16,6 @@ namespace Antipode {
     template <uint32 IFSVEC_MAX, uint32 IECVEC_MAX, uint32 IPCVEC_MAX> class InterruptController;
 
     /**
-     * 
      * Represents an interrupt source.
      */
     class InterruptSource {
@@ -24,7 +23,6 @@ namespace Antipode {
     public:
         /**
          * Build an interrupt source.
-         * 
          * @param ifsVecIndex interrupt flags vector index
          * @param iecVecIndex interrupt enable vector index
          * @param ipcVecIndex interrupt priority vector index

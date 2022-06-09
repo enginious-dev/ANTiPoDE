@@ -20,6 +20,8 @@
         <itemPath>lib/Exceptions/MemoryManagerException.cpp</itemPath>
         <itemPath>lib/Exceptions/IOException.h</itemPath>
         <itemPath>lib/Exceptions/IOException.cpp</itemPath>
+        <itemPath>lib/Exceptions/TimerException.h</itemPath>
+        <itemPath>lib/Exceptions/TimerException.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f7" displayName="Interrupts" projectFiles="true">
         <itemPath>lib/Interrupts/InterruptSource.h</itemPath>
@@ -36,6 +38,10 @@
       </logicalFolder>
       <logicalFolder name="f4" displayName="Registers" projectFiles="true">
         <itemPath>lib/Registers/Registers.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f8" displayName="Timers" projectFiles="true">
+        <itemPath>lib/Timers/CoreTimer.cpp</itemPath>
+        <itemPath>lib/Timers/CoreTimer.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -206,7 +212,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts"/>
+                  value="lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts;lib\Timers"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
@@ -277,6 +283,7 @@
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
