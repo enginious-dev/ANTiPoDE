@@ -2,6 +2,7 @@
 
 ## v1.0.0 (xx/xx/xxxx)
 #### Enhancements:
+- [#9](https://github.com/enginious-dev/ANTiPoDE/issues/9) Core Timer & Delays implementation
 - [#7](https://github.com/enginious-dev/ANTiPoDE/issues/7) Interrupt Sources implementation
 - [#5](https://github.com/enginious-dev/ANTiPoDE/issues/5) I/O Ports implementation
 - [#3](https://github.com/enginious-dev/ANTiPoDE/issues/3) Register Definition implementation

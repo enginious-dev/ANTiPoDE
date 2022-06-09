@@ -13,6 +13,7 @@
 #include <Registers.h>
 #include <PhysicalPort.h>
 #include <InterruptController.h>
+#include <CoreTimer.h>
 
 #define _IFSVEC_MAX 0x03
 #define _IECVEC_MAX 0x03
@@ -454,6 +455,8 @@ namespace Antipode {
 
     extern volatile InterruptRegister<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX> INT_W __asm__("_INT_W") __attribute__((section("sfrs")));
     InterruptController<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX> interruptController = InterruptController<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX>(INT_W, _INTCON_MVEC_MASK);
+    
+    CoreTimer coreTimer = CoreTimer(_IFSVEC_CTIF_INDEX, _IECVEC_CTIE_INDEX, _IPCVEC_CTIP_INDEX, _IFS_CTIF_MASK, _IEC_CTIE_MASK, _IPC_CTIP_POSITION, _IPC_CTIS_POSITION);
 }
 
 #endif	/* P32MX2XXFXXXB_H */

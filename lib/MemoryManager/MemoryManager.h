@@ -28,11 +28,13 @@ namespace Antipode {
          * @throws MemoryManagerException if minimum heap size is violated or std::malloc fails
          */
         static void init(size_t heapSize);
+        
         /**
          * Get the current available space
          * @return the current available space
          */
         static size_t getHeapFree();
+        
         /**
          * Get the total space
          * @return the total space
@@ -46,6 +48,7 @@ namespace Antipode {
          * @return a pointer to the allocated block if found else NULL as standard c
          * @throws MemoryManagerException if heap is not initialized or an invalid size is passed
          */
+        
         static void * malloc(size_t size);
         /**
          * Release the block pointed from ptr
