@@ -51,7 +51,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a 4x32 bits register that has clr, set & inv sub-registers 
      * associated.
      */
@@ -64,7 +63,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a 4x32 bits register that has only clr sub-register 
      * associated.
      */
@@ -77,7 +75,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a 4x32 bits register that does not have clr, set & 
      * inv sub-registers associated.
      */
@@ -90,7 +87,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a 4x32 bits pad register.
      */
     class PadRegister {
@@ -102,7 +98,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a 1x32 bits register.
      */
     class StandardRegister {
@@ -111,7 +106,6 @@ namespace Antipode {
     };
 
     /**
-     * 
      * Represents a port register set.
      */
     class PortRegister {
@@ -128,6 +122,9 @@ namespace Antipode {
         volatile ClrSetInvRegister cnstat;
     };
 
+    /**
+     * Represents an interrupt register set.
+     */
     template <uint32 IFSVEC_MAX, uint32 IECVEC_MAX, uint32 IPCVEC_MAX> class InterruptRegister {
     public:
         volatile ClrSetInvRegister intcon;
@@ -136,6 +133,20 @@ namespace Antipode {
         volatile ClrSetInvRegister ifs[IFSVEC_MAX];
         volatile ClrSetInvRegister iec[IECVEC_MAX];
         volatile ClrSetInvRegister ipc[IPCVEC_MAX];
+    };
+
+    /**
+     * Represents an I2C register set.
+     */
+    class I2cRegister {
+    public:
+        volatile ClrSetInvRegister con;
+        volatile ClrSetInvRegister stat;
+        volatile ClrSetInvRegister add;
+        volatile ClrSetInvRegister msk;
+        volatile ClrSetInvRegister brg;
+        volatile ClrSetInvRegister trn;
+        volatile BaseOnlyRegister rcv;
     };
 }
 
