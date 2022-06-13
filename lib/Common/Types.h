@@ -31,6 +31,7 @@
 #define NONE 0x00000000
 
 #define FREQ_40_MHZ 0x02625A00 // 40E+6 Hz
+#define FREQ_20_MHZ 0x01312D00 // 20E+6 Hz
 
 namespace Antipode {
 

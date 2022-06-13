@@ -81,23 +81,10 @@ namespace Antipode {
          * @throws TimerException if an invalid TimeUnit is passed as parameter
          */
         void load(volatile uint32 value, TimeUnit timeUnit);
-
-        /**
-         * Wait until 'ticks' have passed
-         * @param ticks the period
-         */
-        void wait(volatile uint32 ticks);
-
-        /**
-         * Wait until 'ticks' have passed calculating from 'value' and 
-         * 'timeUnit'
-         * @param value the value
-         * @param timeUnit the time unit 
-         * @throws TimerException if an invalid TimeUnit is passed as parameter
-         */
-        void wait(volatile uint32 value, TimeUnit timeUnit);
     private:
         static uint32 systemClockFrequency;
+        static uint32 microSecondsScale;
+        static uint32 milliSecondsScale;
     };
 }
 

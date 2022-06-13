@@ -4,10 +4,15 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>config/SystemConfig.h</itemPath>
     </logicalFolder>
     <logicalFolder name="f1" displayName="lib" projectFiles="true">
       <logicalFolder name="f2" displayName="Common" projectFiles="true">
         <itemPath>lib/Common/Types.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f9" displayName="Delay" projectFiles="true">
+        <itemPath>lib/Delay/Delay.h</itemPath>
+        <itemPath>lib/Delay/Delay.S</itemPath>
       </logicalFolder>
       <logicalFolder name="f5" displayName="Devices" projectFiles="true">
         <itemPath>lib/Devices/Devices.h</itemPath>
@@ -90,7 +95,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>false</parseOnProdLoad>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -212,7 +217,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts;lib\Timers"/>
+                  value="config;lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts;lib\Timers;lib\Delay"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
@@ -283,7 +288,6 @@
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
