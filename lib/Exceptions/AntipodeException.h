@@ -10,6 +10,7 @@
 #define	ANTIPODEEXCEPTION_H
 
 #include <exception>
+#include <ExceptionCodes.h>
 
 namespace Antipode {
 

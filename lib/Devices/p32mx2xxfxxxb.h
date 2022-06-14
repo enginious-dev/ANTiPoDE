@@ -13,6 +13,7 @@
 #include <Registers.h>
 #include <PhysicalPort.h>
 #include <InterruptController.h>
+#include <I2cModule.h>
 #include <CoreTimer.h>
 
 #define _IFSVEC_MAX 0x03
@@ -429,6 +430,8 @@
 #define _IPC_DMA3IS_POSITION _IPC10_DMA3IS_POSITION
 #define _IPC_DMA3IP_POSITION _IPC10_DMA3IP_POSITION
 
+#define _I2C_PULSE_GOBBLER_DELAY_TIME 0.00000013
+
 
 
 /**
@@ -445,17 +448,35 @@ __asm__ volatile (".global _PORTB_W");
 __asm__ volatile ("_INT_W = 0xBF881000");
 __asm__ volatile (".global _INT_W");
 
+/**
+ * I2C
+ */
+__asm__ volatile ("_I2C1_W = 0xBF885000");
+__asm__ volatile (".global _I2C1_W");
+__asm__ volatile ("_I2C2_W = 0xBF885100");
+__asm__ volatile (".global _I2C2_W");
+
 namespace Antipode {
-    
+
     extern volatile PortRegister PORTA_W __asm__("_PORTA_W") __attribute__((section("sfrs")));
     PhysicalPort portA = PhysicalPort(PORTA_W);
-    
+
     extern volatile PortRegister PORTB_W __asm__("_PORTB_W") __attribute__((section("sfrs")));
     PhysicalPort portB = PhysicalPort(PORTB_W);
 
     extern volatile InterruptRegister<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX> INT_W __asm__("_INT_W") __attribute__((section("sfrs")));
     InterruptController<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX> interruptController = InterruptController<_IFSVEC_MAX, _IECVEC_MAX, _IPCVEC_MAX>(INT_W, _INTCON_MVEC_MASK);
-    
+
+    extern volatile I2cRegister I2C1_W __asm__("_I2C1_W") __attribute__((section("sfrs")));
+    OutputBit sda1 = OutputBit(portB, BIT_9, false);
+    OutputBit scl1 = OutputBit(portB, BIT_8, false);
+    I2cModule i2c1 = I2cModule(I2C1_W, sda1, scl1, _I2C_PULSE_GOBBLER_DELAY_TIME);
+
+    extern volatile I2cRegister I2C2_W __asm__("_I2C2_W") __attribute__((section("sfrs")));
+    OutputBit sda2 = OutputBit(portB, BIT_2, false);
+    OutputBit scl2 = OutputBit(portB, BIT_3, false);
+    I2cModule i2c2 = I2cModule(I2C2_W, sda2, scl2, _I2C_PULSE_GOBBLER_DELAY_TIME);
+
     CoreTimer coreTimer = CoreTimer(_IFSVEC_CTIF_INDEX, _IECVEC_CTIE_INDEX, _IPCVEC_CTIP_INDEX, _IFS_CTIF_MASK, _IEC_CTIE_MASK, _IPC_CTIP_POSITION, _IPC_CTIS_POSITION);
 }
 
