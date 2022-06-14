@@ -27,6 +27,9 @@
         <itemPath>lib/Exceptions/IOException.cpp</itemPath>
         <itemPath>lib/Exceptions/TimerException.h</itemPath>
         <itemPath>lib/Exceptions/TimerException.cpp</itemPath>
+        <itemPath>lib/Exceptions/ModuleException.h</itemPath>
+        <itemPath>lib/Exceptions/ModuleException.cpp</itemPath>
+        <itemPath>lib/Exceptions/ExceptionCodes.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f7" displayName="Interrupts" projectFiles="true">
         <itemPath>lib/Interrupts/InterruptSource.h</itemPath>
@@ -34,7 +37,7 @@
         <itemPath>lib/Interrupts/InterruptController.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f10" displayName="IO" projectFiles="true">
-	    <itemPath>lib/IO/I2cModule.cpp</itemPath>
+        <itemPath>lib/IO/I2cModule.cpp</itemPath>
         <itemPath>lib/IO/I2cModule.h</itemPath>
         <itemPath>lib/IO/OutputBit.h</itemPath>
         <itemPath>lib/IO/OutputBit.cpp</itemPath>
