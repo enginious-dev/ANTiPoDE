@@ -10,11 +10,11 @@
 #define	INTERRUPTCONTROLLER_H
 
 #include <Registers.h>
-#include <InterruptSource.h>
+#include <AbstractInterruptController.h>
 
 namespace Antipode {
 
-    template <uint32 IFSVEC_MAX, uint32 IECVEC_MAX, uint32 IPCVEC_MAX> class InterruptController {
+    template <uint32 IFSVEC_MAX, uint32 IECVEC_MAX, uint32 IPCVEC_MAX> class InterruptController : public AbstractInterruptController {
     public:
 
         /**
@@ -29,15 +29,17 @@ namespace Antipode {
          * Enables the global interrupt
          * @param multiVectorModeEnabled multi Vector Mode Enabling flag.
          */
-        void enableGlobalInterrupt(bool multiVectorModeEnabled = true) {
-            reg.intcon.set = mvecMask;
+        void enableGlobalInterrupt(bool multiVectorModeEnabled = true) volatile {
+            if (multiVectorModeEnabled) {
+                reg.intcon.set = mvecMask;
+            }
             asm volatile("ei");
         }
 
         /**
          * Disables the global interrupt
          */
-        void disableGlobalInterrupt() {
+        void disableGlobalInterrupt() volatile {
             asm volatile("di");
         }
 
@@ -48,7 +50,7 @@ namespace Antipode {
          * @param priority the interrupt priority
          * @param subPriority the interrupt sub-priority
          */
-        void enableInterrupt(InterruptSource & source, const InterruptPriority priority, const InterruptSubPriority subPriority = Isp0) {
+        void enableInterrupt(InterruptSource & source, const InterruptPriority priority, const InterruptSubPriority subPriority = Isp0) volatile {
             // Clear the interrupt flag
             reg.ifs[source.ifsVecIndex].clear = source.ifsMask;
             // Setpriority and sub-priority
@@ -73,7 +75,7 @@ namespace Antipode {
          */
         bool hasInterruptOccurred(InterruptSource & source) volatile {
             // Very trivial...
-            return RegisterUtils::areHi(reg.ifs[source.ifsVecIndex], source.ifsMask);
+            return RegisterUtils::areHi(reg.ifs[source.ifsVecIndex].base, source.ifsMask);
         }
 
         /**

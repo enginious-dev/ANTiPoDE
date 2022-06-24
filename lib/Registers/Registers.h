@@ -11,6 +11,16 @@
 
 #include <Types.h>
 
+// PPS 
+#define _PPS_VECTOR_MASK       0x000000FF // (255 << _PPS_VECTOR_POSITION[ = 0])
+#define _PPS_INPUT_GROUP_MASK  0x00000F00 // (15 << _PPS_INPUT_GROUP_POSITION[ = 8])
+#define _PPS_OUTPUT_GROUP_MASK 0x0000F000 // (15 << _PPS_OUTPUT_GROUP_POSITION[ = 12])
+#define _PPS_TYPE_MASK         0x00030000 // (3  << _PPS_TYPE_POSITION[ = 16])
+#define _PPS_TYPE_INPUT        0x00020000 // (2  << _PPS_TYPE_POSITION[ = 16])
+#define _PPS_TYPE_OUTPUT       0x00010000 // (1  << _PPS_TYPE_POSITION[ = 16])
+#define _PPS_TYPE_PORT_PIN     0x00030000 // (3  << _PPS_TYPE_POSITION[ = 16])
+#define _PPS_VALUE_MASK        0x003C0000 // (15 << _PPS_VALUE_POSITION[ = 18])
+
 namespace Antipode {
 
     /**
@@ -47,6 +57,27 @@ namespace Antipode {
          */
         static bool isBitValid(uint32 value) {
             return (value != 0) && ((value & (value - 1)) == 0);
+        }
+
+        /**
+         * Returns the least non zero significant bit position:
+         * 
+         * <pre>
+         * RegisterUtils::getLsbPosition(0b11110000); // 4
+         * RegisterUtils::getLsbPosition(0b11100000); // 5
+         * </pre>
+         * 
+         * @param value the value
+         * @return the least non zero significant bit position
+         */
+        static uint8 getLsbPosition(uint32 value) {
+            if (!value) {
+                return 0;
+            }
+            uint32 res = 0;
+            while ((value & (1 << res++)) == 0) {
+            }
+            return res - 1;
         }
     };
 
@@ -147,6 +178,25 @@ namespace Antipode {
         volatile ClrSetInvRegister brg;
         volatile ClrSetInvRegister trn;
         volatile BaseOnlyRegister rcv;
+    };
+
+    /**
+     * Represents a peripheral pin select (PPS) register set.
+     */
+    template <uint32 PPSVEC_MAX> class PeripheralPinSelectRegister {
+    public:
+        volatile BaseOnlyRegister pps[PPSVEC_MAX];
+    };
+
+    /**
+     * Represents configuration bits register set.
+     */
+    class ConfigurationBitsRegister {
+    public:
+        volatile BaseOnlyRegister cfgcon;
+        volatile PadRegister pad;
+        volatile BaseOnlyRegister devid;
+        volatile ClrSetInvRegister syskey;
     };
 }
 
