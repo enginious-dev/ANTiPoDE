@@ -10,6 +10,10 @@
       <logicalFolder name="f2" displayName="Common" projectFiles="true">
         <itemPath>lib/Common/Types.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f11" displayName="Core" projectFiles="true">
+        <itemPath>lib/core/ConfigController.cpp</itemPath>
+        <itemPath>lib/core/ConfigController.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f9" displayName="Delay" projectFiles="true">
         <itemPath>lib/Delay/Delay.h</itemPath>
         <itemPath>lib/Delay/Delay.S</itemPath>
@@ -41,6 +45,7 @@
         <itemPath>lib/IO/I2cModule.h</itemPath>
         <itemPath>lib/IO/OutputBit.h</itemPath>
         <itemPath>lib/IO/OutputBit.cpp</itemPath>
+        <itemPath>lib/IO/PeripheralPinSelectController.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="MemoryManager" projectFiles="true">
         <itemPath>lib/MemoryManager/MemoryManager.cpp</itemPath>
@@ -226,7 +231,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="config;lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts;lib\Timers;lib\Delay;lib\IO"/>
+                  value="config;lib;lib\Common;lib\MemoryManager;lib\Exceptions;lib\Registers;lib\Devices;lib\Ports;lib\Interrupts;lib\Timers;lib\Delay;lib\IO;lib\Core"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="false"/>
