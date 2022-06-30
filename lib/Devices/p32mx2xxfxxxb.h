@@ -17,6 +17,7 @@
 #include <PeripheralPinSelectController.h>
 #include <I2cModule.h>
 #include <CoreTimer.h>
+#include <UartModule.h>
 
 // PIN CONSTANTS
 #define A0  BIT_0
@@ -624,6 +625,14 @@
 #define SYSKEY_LOCK_SIZE   1
 #define SYSKEY_LOCK_0      0x00000000
 
+// UART
+#define _UxMODE_ON_MASK        _U1MODE_ON_MASK
+#define _UxMODE_SIDL_MASK      _U1MODE_SIDL_MASK
+#define _UxMODE_PDSEL_POSITION _U1MODE_PDSEL_POSITION
+#define _UxSTA_URXEN_MASK      _U1STA_URXEN_MASK
+#define _UxSTA_UTXEN_MASK      _U1STA_UTXEN_MASK
+#define _UxSTA_UTXBF_MASK      _U1STA_UTXBF_MASK
+#define _UxSTA_TRMT_MASK       _U1STA_TRMT_MASK
 /**
  * I/O PORTS
  */
@@ -661,6 +670,15 @@ __asm__ volatile (".global _PPS_IN_W");
 __asm__ volatile ("_PPS_OUT_W = 0xBF80FB00");
 __asm__ volatile (".global _PPS_OUT_W");
 
+/**
+ * UART
+ */
+__asm__ volatile ("_UART1_W = 0xBF806000");
+__asm__ volatile (".global _UART1_W");
+
+__asm__ volatile ("_UART2_W = 0xBF806200");
+__asm__ volatile (".global _UART2_W");
+
 namespace Antipode {
 
     extern volatile PortRegister PORTA_W __asm__("_PORTA_W") __attribute__((section("sfrs")));
@@ -683,18 +701,39 @@ namespace Antipode {
     I2cModule i2c2 = I2cModule(I2C2_W, sda2, scl2, _I2C_PULSE_GOBBLER_DELAY_TIME);
 
     CoreTimer coreTimer = CoreTimer(_IFSVEC_CTIF_INDEX, _IECVEC_CTIE_INDEX, _IPCVEC_CTIP_INDEX, _IFS_CTIF_MASK, _IEC_CTIE_MASK, _IPC_CTIP_POSITION, _IPC_CTIS_POSITION);
-    
+
     extern volatile ConfigurationBitsRegister DEVCFG_W __asm__("_DEVCFG_W") __attribute__((section("sfrs")));
-    ConfigController configController = ConfigController(DEVCFG_W, 1, (uint32[]) {SYSKEY_UNLOCK_0, SYSKEY_UNLOCK_1, SYSKEY_UNLOCK_2}, SYSKEY_UNLOCK_SIZE, (uint32[]) {SYSKEY_LOCK_0}, SYSKEY_LOCK_SIZE, &interruptController);
-    
+
+    ConfigController configController = ConfigController(DEVCFG_W, 1, (uint32[]) {
+        SYSKEY_UNLOCK_0, SYSKEY_UNLOCK_1, SYSKEY_UNLOCK_2
+    }, SYSKEY_UNLOCK_SIZE, (uint32[]) {
+        SYSKEY_LOCK_0
+    }, SYSKEY_LOCK_SIZE, &interruptController);
+
     extern volatile PeripheralPinSelectRegister<_PPS_INVEC_MAX> PPS_IN_W __asm__("_PPS_IN_W") __attribute__((section("sfrs")));
     extern volatile PeripheralPinSelectRegister<_PPS_OUTVEC_MAX> PPS_OUT_W __asm__("_PPS_OUT_W") __attribute__((section("sfrs")));
-    PeripheralPinSelectController<_PPS_INVEC_MAX, _PPS_OUTVEC_MAX> peripheralPinSelectController = PeripheralPinSelectController<_PPS_INVEC_MAX, _PPS_OUTVEC_MAX>(PPS_IN_W, _PPS_INVEC_MAX,PPS_OUT_W, _PPS_OUTVEC_MAX, configController);
-    
-    #define _PPS_INVEC_MAX  46
+    PeripheralPinSelectController<_PPS_INVEC_MAX, _PPS_OUTVEC_MAX> peripheralPinSelectController = PeripheralPinSelectController<_PPS_INVEC_MAX, _PPS_OUTVEC_MAX>(PPS_IN_W, _PPS_INVEC_MAX, PPS_OUT_W, _PPS_OUTVEC_MAX, configController);
+
+    UartBits uartBits = {
+        _UxMODE_ON_MASK, // modeOnMask
+        _UxMODE_SIDL_MASK, // modeSidlmask
+        _UxMODE_PDSEL_POSITION, // modePdselPosition
+        _UxSTA_URXEN_MASK, // staRxEnMask
+        _UxSTA_UTXEN_MASK, // staTxEnMask
+        _UxSTA_UTXBF_MASK, // staUtxbfMask
+        _UxSTA_TRMT_MASK //staTrmtMask
+    };
+
+    extern volatile UartRegister UART1_W __asm__("_UART1_W") __attribute__((section("sfrs")));
+    extern volatile UartRegister UART2_W __asm__("_UART2_W") __attribute__((section("sfrs")));
+    UartModule uart1 = UartModule(UART1_W, configController, uartBits);
+    UartModule uart2 = UartModule(UART2_W, configController, uartBits);
+
+
+#define _PPS_INVEC_MAX  46
 #define _PPS_OUTVEC_MAX 37
-    
-    
+
+
 }
 
 #endif	/* P32MX2XXFXXXB_H */

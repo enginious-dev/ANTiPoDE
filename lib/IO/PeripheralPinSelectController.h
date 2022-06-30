@@ -12,8 +12,6 @@
 #include <Registers.h>
 #include <IOException.h>
 
-#define _PPS_TYPE
-
 namespace Antipode {
 
     template <uint32 PPS_INVEC_MAX, uint32 PPS_OUTVEC_MAX> class PeripheralPinSelectController {

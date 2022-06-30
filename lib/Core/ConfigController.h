@@ -58,6 +58,25 @@ namespace Antipode {
          * Set the IOLOCK bit in CFGCON
          */
         void setIoLock() volatile;
+        
+        /**
+         * Initializes clocks
+         */
+        void init(uint32 systemClock, uint32 peripheralBusClock);
+        
+        /**
+         * Returns the system clock
+         * @return the system clock
+         * @throws RuntimeException if called before init (framework not initialized)
+         */
+        uint32 getSystemClock() volatile;
+        
+        /**
+         * Returns the peripheral bus clock
+         * @return the peripheral bus clock
+         * @throws RuntimeException if called before init (framework not initialized)
+         */
+        uint32 getPeripherlBusClock() volatile;
 
     private:
         volatile AbstractInterruptController * interruptController;
@@ -67,6 +86,10 @@ namespace Antipode {
         uint8 syskeyUnlockSequenceSize;
         uint32 * syskeyLockSequence;
         uint8 syskeyLockSequenceSize;
+        uint32 systemClock;
+        uint32 peripheralBusClock;
+        bool inizialized;
+                
 
     };
 }

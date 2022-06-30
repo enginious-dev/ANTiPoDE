@@ -198,6 +198,18 @@ namespace Antipode {
         volatile BaseOnlyRegister devid;
         volatile ClrSetInvRegister syskey;
     };
+
+    /**
+     * Represents an UART register set.
+     */
+    class UartRegister {
+    public:
+        volatile ClrSetInvRegister mode;
+        volatile ClrSetInvRegister sta;
+        volatile BaseOnlyRegister tx;
+        volatile BaseOnlyRegister rx;
+        volatile ClrSetInvRegister brg;
+    };
 }
 
 #endif	/* REGISTERS_H */

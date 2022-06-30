@@ -12,10 +12,11 @@
 /**
  * Codes
  */
-#define MEMORY_ERROR 0x01000000
-#define IO_ERROR     0x02000000
-#define TIMER_ERROR  0x03000000
-#define MODULE_ERROR 0x04000000
+#define MEMORY_ERROR  0x01000000
+#define IO_ERROR      0x02000000
+#define TIMER_ERROR   0x03000000
+#define MODULE_ERROR  0x04000000
+#define RUNTIME_ERROR 0x05000000
 
 /**
  * Memory errors
@@ -79,5 +80,11 @@
 
 #define MODULE_OPERATION_NOT_ALLOWED_WITHIN_CURRENT_CONFIG_CODE (MODULE_ERROR | 2)
 #define MODULE_OPERATION_NOT_ALLOWED_WITHIN_CURRENT_CONFIG_MESSAGE ((char *) "operation not allowed within current configuration")
+
+/**
+ * Runtime errors
+ */
+#define FRAMEWORK_NOT_INITIALIZED_CODE (RUNTIME_ERROR | 1)
+#define FRAMEWORK_NOT_INITIALIZED_MESSAGE ((char *) "framework not initialized")
 
 #endif	/* EXCEPTIONCODES_H */

@@ -46,6 +46,8 @@
         <itemPath>lib/IO/OutputBit.h</itemPath>
         <itemPath>lib/IO/OutputBit.cpp</itemPath>
         <itemPath>lib/IO/PeripheralPinSelectController.h</itemPath>
+        <itemPath>lib/IO/UartModule.cpp</itemPath>
+        <itemPath>lib/IO/UartModule.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="MemoryManager" projectFiles="true">
         <itemPath>lib/MemoryManager/MemoryManager.cpp</itemPath>
@@ -77,6 +79,8 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>lib/Exceptions/RuntimeException.h</itemPath>
+    <itemPath>lib/Exceptions/RuntimeException.cpp</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>src</Elem>
@@ -302,6 +306,7 @@
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
